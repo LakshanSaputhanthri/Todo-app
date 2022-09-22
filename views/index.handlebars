@@ -1,0 +1,75 @@
+
+
+
+<div class="container">
+  <div class="head">
+    <div>Todo List</div>
+  </div>
+  <form action="/api/users" method="post">
+ 
+    <div class="add-task">
+      
+      <div class="add-task-text"><input
+          type="text"
+          placeholder="What's need to be done ?"
+          class="input-task"
+          id="addTask"
+          name="todos"  
+        /></div>
+      <div class="add-task-btn">
+        <input type="submit" value="Add Task" class="btn-add-task" id="addBtn" />
+      </div>
+    </div>
+    <div class="empty-task-hidden" id="emptyTask">Task can't be empty</div>
+  </form>
+  {{#each todos}}
+  <div class="todo-item">
+
+    <form action="/api/users/{{this.id}}/checked" class="a" method="post">
+      <button class="circle-border">
+        <div class="icon">
+         <i class="{{this.checked}}" style="background-color:black;font-size: 16px;color:rgb(44, 42, 42);color:white"></i>
+        </div>
+      </button>
+    </form>
+
+    <form action="/api/users/{{this.id}}/update" class="a" method="post">
+      <input type="text" class="item-text {{this.active}} " value="{{this.todos}}" {{this.active}} name="todos"></input>
+    </form>
+
+    <form action="/api/users/{{this.id}}/update/anabled" class="a" method="post">  
+      <button class="circle-border" >
+        <div >
+          <I class="fa fa-pencil" style="font-size: 20px;color:rgb(44, 42, 42)"></i>
+        </div>
+      </button>
+    </form>
+
+    <form action="/api/users/{{this.id}}/delete" method="post">
+      <button class="circle-border">
+        <div >
+          <i class="fa fa-trash-o" style="font-size: 20px;color:rgb(44, 42, 42)"></i>
+        </div>
+      </button>
+    </form>
+  </div>
+ {{/each}}
+</div>
+ <script>
+   let addTask=document.getElementById("addTask")
+   let addBtn=document.getElementById("addBtn")
+   let emptytask=document.getElementById("emptyTask")
+   let val=addTask.value
+   addBtn.addEventListener("click",(val)=>{
+ 
+     if(addTask.value===""){
+       emptytask.className="empty-task-visible"
+     }
+     else{
+       emptytask.className="empty-task-hidden"
+     }
+   })
+   
+   
+  
+ </script>
