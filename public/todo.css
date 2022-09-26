@@ -135,6 +135,12 @@ body {
   height: 2rem;
   color: aliceblue;
 }
+.cross-line {
+  text-decoration: line-through;
+  text-decoration-thickness: 0.1rem;
+  text-decoration-color: black;
+  color: black;
+}
 
 /* .heading-todo {
   display: flex;

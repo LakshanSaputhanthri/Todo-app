@@ -1,7 +1,7 @@
 import express from "express";
 import todo from "../../Todo.js";
 const router = express.Router();
-let toDoId = 3;
+let toDoId = 4;
 router.get("/", (req, res) => {
   console.log(todo);
   res.send(todo);
@@ -29,8 +29,21 @@ router.post("/:id/checked", (req, res) => {
   const found = todo.find((user) => user.id === parseInt(req.params.id));
   console.log(found);
   if (found) {
-    found.checked = `fa-solid fa-check`;
+    console.log(found.checked);
+    if (found.checked === "fa-solid fa-check") {
+      found.checked = "";
+      found.tick = "";
+    } else {
+      found.checked = "fa-solid fa-check";
+      found.tick = "cross-line";
+    }
+    // found.checked = () => {
+    //   found.checked === "fa-solid fa-check" ? "fa-solid fa-check" : "";
+    // };
+    //found.checked = `fa-solid fa-check`;
+
     res.redirect("/");
+    console.log("first");
   } else {
     res.send("in valid todo");
     console.log("invalid todo");
@@ -52,6 +65,8 @@ router.post("/:id/update", (req, res) => {
   console.log(td);
   td.active = "disabled";
   td.todos = req.body.todos;
+  td.tick = "";
+  td.checked = "";
   res.redirect("/");
 });
 //update tode enabled
